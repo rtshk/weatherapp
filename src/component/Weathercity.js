@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Item3() {
+export default function Weathercity() {
   return (
     <>
     <div>
