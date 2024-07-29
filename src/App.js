@@ -1,31 +1,36 @@
 import React from "react";
-import Input from "./component/Input";
-import Weathercity from "./component/Weathercity";
-import Hourlyweather from "./component/Hourlyweather";
-import Weatherdetails from "./component/Weatherdetails";
-import Airquality from "./component/Airquality";
+import Weather from "./component/Weather";
+import { useState } from "react";
+import { useEffect } from "react";
+// let cityName = "chandigarh"
 
 export default function App() {
+
+  const [longitude, setLongitude] = useState("")
+  const [latitude, setLatitude] = useState("")
+  const [cityName, setCityName] = useState("")
+  
+    
+    const fetchWeatherCoordinates = async () => {
+        let url = `http://api.openweathermap.org/geo/1.0/direct?q=ambala&limit=1&appid=b4497a8b1ebf1e766ee5d51e5b9d801e`
+        let data = await fetch(url)
+        let parsedData = await data.json()
+        setLongitude(parsedData[0].lon)
+        setLatitude(parsedData[0].lat)
+        setCityName(parsedData[0].name)
+       
+    }
+      
+
+      useEffect(() => {
+         fetchWeatherCoordinates()
+           }
+        , [])
+  
+
   return (
     <>
-      <div className=" h-screen text-white gap-5 grid grid-cols-[7%_70%_1fr] grid-rows-[10%_1fr_1fr_1fr] bg-home-background font-sans">
-        <div className="row-span-4 mt-4 mb-4 ml-4 bg-custom-dark-blue rounded-3xl"></div>
-        <div className="mt-4">
-          <Input />
-        </div>
-        <div className="rounded-3xl">
-          <Weathercity />
-        </div>
-        <div className="bg-custom-dark-blue rounded-3xl">
-          <Hourlyweather />
-        </div>
-        <div className="mb-4  bg-custom-dark-blue rounded-3xl">
-          <Weatherdetails />
-        </div>
-        <div className="row-start-1 row-end-5 col-start-3 col-end-4 mt-4 mb-4 mr-4  bg-custom-dark-blue rounded-3xl">
-          <Airquality />
-        </div>
-      </div>
+      <Weather cityName = {cityName} latitude = {latitude} longitude = {longitude}/>
     </>
   );
 }
