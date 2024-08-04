@@ -45,7 +45,7 @@ export default function Weather(props) {
       <div className=" h-screen text-white gap-5 grid grid-cols-[7%_70%_1fr] grid-rows-[10%_1fr_1fr_1fr] bg-home-background font-sans">
         <div className="row-span-4 mt-4 mb-4 ml-4 bg-custom-dark-blue rounded-3xl"></div>
         <div className="mt-4">
-          <Input />
+          <Input  />
         </div>
         <div className="rounded-3xl">
           <Weathercity cityName = {cityName} temp = {celcius(temp)} />

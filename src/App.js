@@ -10,9 +10,16 @@ export default function App() {
   const [latitude, setLatitude] = useState("")
   const [cityName, setCityName] = useState("")
   
-    
+  
+  // const handleKeyDown = (event) => {
+  //   if (event.key === 'Enter') {
+  //     event.preventDefault();
+  //     setCityName(event.target.value)
+      
+  //   }
+  // };
     const fetchWeatherCoordinates = async () => {
-        let url = `http://api.openweathermap.org/geo/1.0/direct?q=ambala&limit=1&appid=b4497a8b1ebf1e766ee5d51e5b9d801e`
+        let url = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=b4497a8b1ebf1e766ee5d51e5b9d801e`
         let data = await fetch(url)
         let parsedData = await data.json()
         setLongitude(parsedData[0].lon)
@@ -30,7 +37,7 @@ export default function App() {
 
   return (
     <>
-      <Weather cityName = {cityName} latitude = {latitude} longitude = {longitude}/>
+      <Weather cityName = {cityName} latitude = {latitude} longitude = {longitude}  />
     </>
   );
 }
